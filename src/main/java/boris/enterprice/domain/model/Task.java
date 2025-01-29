@@ -52,7 +52,7 @@ public class Task {
         return status;
     }
 
-    private void setStatus(final TasksStatus status) {
+    public void setStatus(final TasksStatus status) {
         this.status = status;
     }
 

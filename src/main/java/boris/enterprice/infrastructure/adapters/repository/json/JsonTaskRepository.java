@@ -33,6 +33,23 @@ public class JsonTaskRepository implements TaskRepository {
     }
 
     @Override
+    public Task updateStatus(String status, String uuid) {
+        List<Task> tasks = findAll();
+        for (Task task : tasks) {
+            if (task.getId().toString().equals(uuid)) {
+                task.setStatus(TasksStatus.valueOf(status));
+                try {
+                    objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), tasks);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return task;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public List<Task> findByStatus(TasksStatus status) {
         return List.of();
     }

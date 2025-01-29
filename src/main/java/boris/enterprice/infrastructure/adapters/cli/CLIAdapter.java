@@ -1,9 +1,6 @@
 package boris.enterprice.infrastructure.adapters.cli;
 
-import boris.enterprice.application.task.AddTaskUseCase;
-import boris.enterprice.application.task.DeleteTaskUseCase;
-import boris.enterprice.application.task.ListTaskUseCase;
-import boris.enterprice.application.task.UpdateTaskUseCase;
+import boris.enterprice.application.task.*;
 import boris.enterprice.infrastructure.adapters.cli.commands.*;
 import boris.enterprice.infrastructure.adapters.cli.commands.Interface.Command;
 import boris.enterprice.utils.UtilText;
@@ -18,11 +15,15 @@ public class CLIAdapter {
     public CLIAdapter(AddTaskUseCase addTaskUseCase,
                       ListTaskUseCase listTaskUseCase,
                       UpdateTaskUseCase updateTaskUseCase,
-                      DeleteTaskUseCase deleteTaskUseCase) {
+                      DeleteTaskUseCase deleteTaskUseCase,
+                      UpdateStatusToProgressTaskUseCase updateStatusToProgressTaskUseCase,
+                      UpdateStatusToDoneTaskUseCase updateStatusToDoneTaskUseCase) {
         registerCommand(new AddCommand(addTaskUseCase));
         registerCommand(new ListCommand(listTaskUseCase));
         registerCommand(new UpdateCommand(updateTaskUseCase));
         registerCommand(new DeleteCommand(deleteTaskUseCase));
+        registerCommand(new UpdateStatusToProgressCommand(updateStatusToProgressTaskUseCase));
+        registerCommand(new UpdateStatusToDoneCommand(updateStatusToDoneTaskUseCase));
         registerCommand(new HelpCommand(commands));
         registerCommand(new ExitCommand());
     }

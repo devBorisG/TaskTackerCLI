@@ -7,13 +7,13 @@
 }, {
   "id" : "3d834a8b-55ab-4cb9-948b-6bf6dc76ee8c",
   "description" : "\"test2\"",
-  "status" : "TODO",
+  "status" : "DONE",
   "createdAt" : 1738163052197,
   "updatedAt" : 0
 }, {
   "id" : "05d9bc49-43fb-4267-a864-d24fd63cd3fd",
   "description" : "\"test3\"",
-  "status" : "TODO",
+  "status" : "DONE",
   "createdAt" : 1738164643379,
   "updatedAt" : 0
 } ]
