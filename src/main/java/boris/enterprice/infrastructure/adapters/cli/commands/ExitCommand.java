@@ -1,6 +1,8 @@
 package boris.enterprice.infrastructure.adapters.cli.commands;
 
-public class ExitCommand implements Command{
+import boris.enterprice.infrastructure.adapters.cli.commands.Interface.Command;
+
+public class ExitCommand implements Command {
     @Override
     public String getName() {
         return "exit";

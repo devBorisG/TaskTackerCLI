@@ -44,7 +44,7 @@ public class Task {
         return description;
     }
 
-    private void setDescription(final String description) {
+    public void setDescription(final String description) {
         this.description = UtilText.getInstance().getDefaultText(description);
     }
 

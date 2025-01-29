@@ -8,7 +8,7 @@ import java.util.List;
 public interface TaskRepository {
     Task save(Task task);
     List<Task> findByStatus(TasksStatus status);
-    Task update(String uuid);
+    Task update(String uuid, String description);
     boolean delete(String uuid);
     List<Task> findAll();
 }

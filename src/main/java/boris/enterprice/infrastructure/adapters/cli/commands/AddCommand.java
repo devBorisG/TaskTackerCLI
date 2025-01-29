@@ -2,9 +2,10 @@ package boris.enterprice.infrastructure.adapters.cli.commands;
 
 import boris.enterprice.application.task.interfaces.IAddTaskUseCase;
 import boris.enterprice.domain.model.Task;
+import boris.enterprice.infrastructure.adapters.cli.commands.Interface.Command;
 import boris.enterprice.utils.UtilText;
 
-public class AddCommand implements Command{
+public class AddCommand implements Command {
 
     private final IAddTaskUseCase addTaskUseCase;
 
@@ -24,13 +25,12 @@ public class AddCommand implements Command{
             return;
         }
         String description = args[0];
-        System.out.println(description);
 
         if (UtilText.getInstance().validMatch(description, "^\"[^\"]*\"$")) {
             Task task = addTaskUseCase.execute(description);
             System.out.println("Task: "+ task.getDescription() + " added " + " with id: " + task.getId());
         } else {
-            System.out.println("Description is empty");
+            System.out.println("Description must be in quotes");
         }
     }
 

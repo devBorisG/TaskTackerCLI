@@ -38,12 +38,36 @@ public class JsonTaskRepository implements TaskRepository {
     }
 
     @Override
-    public Task update(String uuid) {
+    public Task update(String uuid, String description) {
+        List<Task> tasks = findAll();
+        for (Task task : tasks) {
+            if (task.getId().toString().equals(uuid)) {
+                task.setDescription(description);
+                try {
+                    objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), tasks);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return task;
+            }
+        }
         return null;
     }
 
     @Override
     public boolean delete(String uuid) {
+        List<Task> tasks = findAll();
+        for (Task task : tasks) {
+            if (task.getId().toString().equals(uuid)) {
+                tasks.remove(task);
+                try {
+                    objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), tasks);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+        }
         return false;
     }
 

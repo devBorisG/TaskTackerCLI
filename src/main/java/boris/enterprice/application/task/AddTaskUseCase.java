@@ -1,4 +1,4 @@
-package boris.enterprice.application;
+package boris.enterprice.application.task;
 
 import boris.enterprice.application.task.interfaces.IAddTaskUseCase;
 import boris.enterprice.domain.model.Task;

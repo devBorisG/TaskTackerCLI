@@ -1,8 +1,10 @@
 package boris.enterprice.infrastructure.adapters.cli.commands;
 
+import boris.enterprice.infrastructure.adapters.cli.commands.Interface.Command;
+
 import java.util.Map;
 
-public class HelpCommand implements Command{
+public class HelpCommand implements Command {
 
     private final Map<String, Command> commands;
 

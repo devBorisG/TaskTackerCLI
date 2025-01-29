@@ -1,10 +1,11 @@
 package boris.enterprice.infrastructure.adapters.cli;
 
-import boris.enterprice.application.AddTaskUseCase;
-import boris.enterprice.infrastructure.adapters.cli.commands.AddCommand;
-import boris.enterprice.infrastructure.adapters.cli.commands.Command;
-import boris.enterprice.infrastructure.adapters.cli.commands.ExitCommand;
-import boris.enterprice.infrastructure.adapters.cli.commands.HelpCommand;
+import boris.enterprice.application.task.AddTaskUseCase;
+import boris.enterprice.application.task.DeleteTaskUseCase;
+import boris.enterprice.application.task.ListTaskUseCase;
+import boris.enterprice.application.task.UpdateTaskUseCase;
+import boris.enterprice.infrastructure.adapters.cli.commands.*;
+import boris.enterprice.infrastructure.adapters.cli.commands.Interface.Command;
 import boris.enterprice.utils.UtilText;
 
 import java.util.HashMap;
@@ -14,8 +15,14 @@ import java.util.Scanner;
 public class CLIAdapter {
     private final Map<String, Command> commands = new HashMap<>();
 
-    public CLIAdapter(AddTaskUseCase addTaskUseCase) {
+    public CLIAdapter(AddTaskUseCase addTaskUseCase,
+                      ListTaskUseCase listTaskUseCase,
+                      UpdateTaskUseCase updateTaskUseCase,
+                      DeleteTaskUseCase deleteTaskUseCase) {
         registerCommand(new AddCommand(addTaskUseCase));
+        registerCommand(new ListCommand(listTaskUseCase));
+        registerCommand(new UpdateCommand(updateTaskUseCase));
+        registerCommand(new DeleteCommand(deleteTaskUseCase));
         registerCommand(new HelpCommand(commands));
         registerCommand(new ExitCommand());
     }
@@ -36,19 +43,23 @@ public class CLIAdapter {
             }
             String[] parts = input.split("\\s+");
 
-            if(!parts[0].equals("task-cli")){
+            if(!parts[0].equals("task-cli") && !parts[0].equals("help") && !parts[0].equals("exit")){
                 System.out.println("Invalid command, type 'help' to see the available commands");
                 continue;
             }
 
-            String cmdName = parts[1].toLowerCase();
+            String cmdName = parts[0].equals("help") ? "help" : parts[0].equals("exit") ? "exit" : parts[1].toLowerCase();
 
-            String[] cmdArgs = new String[parts.length - 2];
-            System.arraycopy(parts, 2, cmdArgs, 0, cmdArgs.length );
+            String[] cmdArgs = new String[1];
+
+            if(!cmdName.equals("list") && !cmdName.equals("help") && !cmdName.equals("exit")){
+                cmdArgs = new String[parts.length - 2];
+                System.arraycopy(parts, 2, cmdArgs, 0, cmdArgs.length );
+            }
 
             Command cmd = commands.get(cmdName);
             if (cmd == null) {
-                System.out.println("Invalid command"+ cmdName +", type 'help' to see the available commands");
+                System.out.println("Invalid command "+ cmdName +", type 'help' to see the available commands");
                 continue;
             }
 
