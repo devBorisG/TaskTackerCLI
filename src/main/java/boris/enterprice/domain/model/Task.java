@@ -68,7 +68,7 @@ public class Task {
         return updatedAt;
     }
 
-    private void setUpdatedAt(final Date updatedAt) {
+    public void setUpdatedAt(final Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

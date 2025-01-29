@@ -18,6 +18,7 @@ public class Main {
         DeleteTaskUseCase deleteTaskUseCase = new DeleteTaskUseCase(taskRepository);
         UpdateStatusToDoneTaskUseCase updateStatusToDoneTaskUseCase = new UpdateStatusToDoneTaskUseCase(taskRepository);
         UpdateStatusToProgressTaskUseCase updateStatusToProgressTaskUseCase = new UpdateStatusToProgressTaskUseCase(taskRepository);
+        ListByStatusTaskUseCase listByStatusTaskUseCase = new ListByStatusTaskUseCase(taskRepository);
 
         CLIAdapter cliAdapter = new CLIAdapter(
                 addTaskUseCase,
@@ -25,7 +26,8 @@ public class Main {
                 updateTaskUseCase,
                 deleteTaskUseCase,
                 updateStatusToProgressTaskUseCase,
-                updateStatusToDoneTaskUseCase
+                updateStatusToDoneTaskUseCase,
+                listByStatusTaskUseCase
         );
 
         cliAdapter.start();

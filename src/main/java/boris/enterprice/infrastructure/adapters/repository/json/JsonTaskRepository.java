@@ -9,7 +9,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 
 public class JsonTaskRepository implements TaskRepository {
     private final String filePath;
@@ -38,6 +40,7 @@ public class JsonTaskRepository implements TaskRepository {
         for (Task task : tasks) {
             if (task.getId().toString().equals(uuid)) {
                 task.setStatus(TasksStatus.valueOf(status));
+                task.setUpdatedAt(new Date());
                 try {
                     objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), tasks);
                 } catch (IOException e) {
@@ -51,7 +54,14 @@ public class JsonTaskRepository implements TaskRepository {
 
     @Override
     public List<Task> findByStatus(TasksStatus status) {
-        return List.of();
+        List<Task> tasks = findAll();
+        List<Task> tasksByStatus = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getStatus().equals(status)) {
+                tasksByStatus.add(task);
+            }
+        }
+        return tasksByStatus;
     }
 
     @Override
@@ -60,6 +70,7 @@ public class JsonTaskRepository implements TaskRepository {
         for (Task task : tasks) {
             if (task.getId().toString().equals(uuid)) {
                 task.setDescription(description);
+                task.setUpdatedAt(new Date());
                 try {
                     objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), tasks);
                 } catch (IOException e) {

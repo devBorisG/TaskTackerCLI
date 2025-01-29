@@ -18,7 +18,7 @@ public class ListCommand implements Command {
 
     @Override
     public String getName() {
-        return "list";
+        return "list-all";
     }
 
     @Override
@@ -48,6 +48,6 @@ public class ListCommand implements Command {
 
     @Override
     public String getHelp() {
-        return "task-cli list - List all tasks";
+        return "task-cli list-all - List all tasks";
     }
 }

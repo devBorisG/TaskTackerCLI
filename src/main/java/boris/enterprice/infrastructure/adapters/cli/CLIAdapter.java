@@ -17,13 +17,16 @@ public class CLIAdapter {
                       UpdateTaskUseCase updateTaskUseCase,
                       DeleteTaskUseCase deleteTaskUseCase,
                       UpdateStatusToProgressTaskUseCase updateStatusToProgressTaskUseCase,
-                      UpdateStatusToDoneTaskUseCase updateStatusToDoneTaskUseCase) {
+                      UpdateStatusToDoneTaskUseCase updateStatusToDoneTaskUseCase,
+                      ListByStatusTaskUseCase listByStatusTaskUseCase
+                      ) {
         registerCommand(new AddCommand(addTaskUseCase));
         registerCommand(new ListCommand(listTaskUseCase));
         registerCommand(new UpdateCommand(updateTaskUseCase));
         registerCommand(new DeleteCommand(deleteTaskUseCase));
         registerCommand(new UpdateStatusToProgressCommand(updateStatusToProgressTaskUseCase));
         registerCommand(new UpdateStatusToDoneCommand(updateStatusToDoneTaskUseCase));
+        registerCommand(new ListByStatusCommand(listByStatusTaskUseCase));
         registerCommand(new HelpCommand(commands));
         registerCommand(new ExitCommand());
     }
@@ -53,7 +56,7 @@ public class CLIAdapter {
 
             String[] cmdArgs = new String[1];
 
-            if(!cmdName.equals("list") && !cmdName.equals("help") && !cmdName.equals("exit")){
+            if((!cmdName.equals("list-all") && !cmdName.equals("help") && !cmdName.equals("exit")) || (cmdName.equals("list") && parts.length > 2)){
                 cmdArgs = new String[parts.length - 2];
                 System.arraycopy(parts, 2, cmdArgs, 0, cmdArgs.length );
             }
