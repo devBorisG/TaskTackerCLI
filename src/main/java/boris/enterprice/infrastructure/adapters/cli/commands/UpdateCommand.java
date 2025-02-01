@@ -6,19 +6,37 @@ import boris.enterprice.utils.UtilText;
 
 import java.util.HashMap;
 
+/**
+ * Command to update a task.
+ */
 public class UpdateCommand implements Command {
 
     private final IUpdateTaskUseCase updateTaskUseCase;
 
+    /**
+     * Constructor for UpdateCommand.
+     *
+     * @param updateTaskUseCase the use case to update a task
+     */
     public UpdateCommand(IUpdateTaskUseCase updateTaskUseCase) {
         this.updateTaskUseCase = updateTaskUseCase;
     }
 
+    /**
+     * Gets the name of the command.
+     *
+     * @return the name of the command
+     */
     @Override
     public String getName() {
         return "update";
     }
 
+    /**
+     * Executes the command with the given arguments.
+     *
+     * @param args the arguments for the command
+     */
     @Override
     public void execute(String[] args) {
         if(args.length < 2){
@@ -40,6 +58,11 @@ public class UpdateCommand implements Command {
         }
     }
 
+    /**
+     * Gets the help message for the command.
+     *
+     * @return the help message
+     */
     @Override
     public String getHelp() {
         return "task-cli update - Update a task";

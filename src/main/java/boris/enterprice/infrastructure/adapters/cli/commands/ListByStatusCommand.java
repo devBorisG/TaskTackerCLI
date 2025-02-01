@@ -1,7 +1,6 @@
 package boris.enterprice.infrastructure.adapters.cli.commands;
 
 import boris.enterprice.application.task.interfaces.IListByStatusTaskUseCase;
-import boris.enterprice.application.task.interfaces.IListTaskUseCase;
 import boris.enterprice.domain.model.Table;
 import boris.enterprice.domain.model.Task;
 import boris.enterprice.domain.model.enums.TasksStatus;
@@ -10,19 +9,37 @@ import boris.enterprice.infrastructure.adapters.cli.commands.Interface.Command;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Command to list tasks by status.
+ */
 public class ListByStatusCommand implements Command {
 
     private final IListByStatusTaskUseCase listTaskUseCase;
 
+    /**
+     * Constructor for ListByStatusCommand.
+     *
+     * @param listTaskUseCase the use case to list tasks by status
+     */
     public ListByStatusCommand(IListByStatusTaskUseCase listTaskUseCase) {
         this.listTaskUseCase = listTaskUseCase;
     }
 
+    /**
+     * Gets the name of the command.
+     *
+     * @return the name of the command
+     */
     @Override
     public String getName() {
         return "list";
     }
 
+    /**
+     * Executes the command with the given arguments.
+     *
+     * @param args the arguments for the command
+     */
     @Override
     public void execute(String[] args) {
         if(args.length < 1){
@@ -68,6 +85,11 @@ public class ListByStatusCommand implements Command {
 
     }
 
+    /**
+     * Gets the help message for the command.
+     *
+     * @return the help message
+     */
     @Override
     public String getHelp() {
         return "task-cli list <status> - List all tasks by status";

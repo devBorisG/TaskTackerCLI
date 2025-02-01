@@ -9,9 +9,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Adapter for the CLI.
+ */
 public class CLIAdapter {
     private final Map<String, Command> commands = new HashMap<>();
 
+    /**
+     * Constructor for CLIAdapter.
+     *
+     * @param addTaskUseCase the use case to add a task
+     * @param listTaskUseCase the use case to list tasks
+     * @param updateTaskUseCase the use case to update a task
+     * @param deleteTaskUseCase the use case to delete a task
+     * @param updateStatusToProgressTaskUseCase the use case to update the status of a task to in progress
+     * @param updateStatusToDoneTaskUseCase the use case to update the status of a task to done
+     * @param listByStatusTaskUseCase the use case to list tasks by status
+     */
     public CLIAdapter(AddTaskUseCase addTaskUseCase,
                       ListTaskUseCase listTaskUseCase,
                       UpdateTaskUseCase updateTaskUseCase,
@@ -31,10 +45,18 @@ public class CLIAdapter {
         registerCommand(new ExitCommand());
     }
 
+    /**
+     * Registers a command.
+     *
+     * @param cmd the command to register
+     */
     private void registerCommand(Command cmd) {
         commands.put(cmd.getName(), cmd);
     }
 
+    /**
+     * Starts the CLI.
+     */
     public void start() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("WELCOME!\nEnter a command or type 'help' to see the available commands or 'exit' to exit the application");

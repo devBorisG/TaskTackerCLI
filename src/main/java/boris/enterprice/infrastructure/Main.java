@@ -5,7 +5,16 @@ import boris.enterprice.domain.repository.TaskRepository;
 import boris.enterprice.infrastructure.adapters.cli.CLIAdapter;
 import boris.enterprice.infrastructure.adapters.repository.json.JsonTaskRepository;
 
+/**
+ * Main class to run the application.
+ */
 public class Main {
+
+    /**
+     * Main method to run the application.
+     *
+     * @param args the arguments to run the application
+     */
     public static void main(String[] args) {
         String filepath = "tasks.json";
 
